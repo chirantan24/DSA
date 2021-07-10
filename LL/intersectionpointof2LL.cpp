@@ -120,3 +120,22 @@ int intersectPoint(Node* head1, Node* head2)
 // Time Complexity : O(M+N)
 // Space Complexity : O(M+N)
 
+int intersectPoint(Node* head1, Node* head2)
+{
+    unordered_set <Node*> s;
+    Node* a=head1;
+    while(a)
+    s.insert(a),a=a->next;
+    a=head2;
+    while(a)
+    {
+        if(s.find(a)!=s.end())
+        return a->data;
+        a=a->next;
+    }
+    // Your Code Here
+}
+
+// Hashing method
+// Time Complexity : O(M+N)
+// Space Complexity : O(M+N)
