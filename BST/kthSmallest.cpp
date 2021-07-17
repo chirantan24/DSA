@@ -19,3 +19,44 @@ int nodes(Node* root)
     }
 // TC : O(N)
 // SC : O(N)
+
+int KthSmallestElement(Node *root, int k)
+    {
+        Node* curr=root,*pre;
+        int count=0;
+        int ans=-1;
+        while(curr)
+        {
+            if(curr->left==NULL)
+            {
+                count++;
+                if(count==k)
+                    ans=curr->data;
+                curr=curr->right;
+            }
+            else
+            {
+                pre=curr->left;
+                while(pre->right!=NULL && pre->right!=curr)
+                pre=pre->right;
+                if(pre->right==NULL)
+                {
+                    pre->right=curr;
+                    curr=curr->left;
+                }
+                else
+                {
+                    pre->right=NULL;
+                    count++;
+                    if(count==k)
+                        ans=curr->data;
+                    curr=curr->right;
+                }
+            }
+        }
+        return ans;
+        //add code here.
+    }
+// Morris Inorder Traversal
+// TC : O(N)
+// SC : O(1)
