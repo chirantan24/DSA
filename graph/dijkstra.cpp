@@ -40,23 +40,26 @@ int n, m;
 vector<vector<int>> G;
 vector<bool> mark;
 vector<int> dist;
-
-void dijkstra(int s){
-    fill(dist.begin(),dist.end(), LIM);
-    
-    set<pi> S;
+void dijkstra(int s,vc<vc<pii>> &g){
+    mark.resize(g.size());
+    dist.resize(g.size());
+    fill(dist.begin(),dist.end(), INT_MAX);
+    fill(mark.begin(),mark.end(), 0);
+    set<pii> S;
     S.insert({dist[s] = 0, s});
+    mark[s]=1;
     while(!S.empty()){
-        int u = S.begin() -> se;
+        int u = S.begin() -> ss;
         S.erase(S.begin());
         
-        for(auto v : G[u])
+        for(auto v : g[u])
         {
-            if(dist[v.fi] > dist[u] + v.se)
+            if(dist[v.ff] > dist[u] + v.ss && !mark[v.ff])
             {
-                S.erase({dist[v.fi], v.fi}); // removing old pair
-                dist[v.fi] = dist[u] + v.se;
-                S.insert({dist[v.fi], v.fi}); // adding new pair
+                mark[v.ff]=1;
+                S.erase({dist[v.ff], v.ff}); 
+                dist[v.ff] = dist[u] + v.ss;
+                S.insert({dist[v.ff], v.ff}); 
             }
         }
     }
